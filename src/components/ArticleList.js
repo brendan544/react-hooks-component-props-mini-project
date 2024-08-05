@@ -1,19 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Article from './Article';
 
-const ArticleList = ({ articles }) => {
-  return (
-    <main>
-      {articles.map((article, index) => (
-        <Article
-          key={index}
-          title={article.title}
-          date={article.date}
-          preview={article.preview}
-        />
-      ))}
-    </main>
-  );
+const ArticleList = ({ posts }) => (
+  <main>
+    {posts.map(post => (
+      <Article
+        key={post.id}
+        title={post.title}
+        date={post.date}
+        preview={post.preview}
+      />
+    ))}
+  </main>
+);
+
+ArticleList.propTypes = {
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      date: PropTypes.string,
+      preview: PropTypes.string.isRequired
+    })
+  ).isRequired
 };
 
 export default ArticleList;
